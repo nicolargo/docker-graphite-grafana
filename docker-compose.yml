@@ -1,0 +1,37 @@
+graphite:
+  # https://github.com/graphite-project/docker-graphite-statsd
+  image:  graphiteapp/graphite-statsd:latest
+  container_name: graphite
+  ports:
+    - "80:80"
+    - "2003-2004:2003-2004"
+    - "2023-2024:2023-2024"
+    # By default, statsd listens on the UDP port 8125. If you want it to listen on the TCP port 8125 instead, 
+    # you can set the environment variable STATSD_INTERFACE to tcp when running the container.
+    - "8125:8125/udp"
+    - "8126:8126"
+  env_file:
+    - 'env.grafana'
+  volumes:
+    # Data persistency
+    # sudo mkdir -p /srv/docker/graphite/conf
+    # sudo mkdir -p /srv/docker/graphite/storage
+    # sudo mkdir -p /srv/docker/graphite/config
+    - /srv/docker/graphite/conf:/opt/graphite/conf
+    - /srv/docker/graphite/storage:/opt/graphite/storage
+    - /srv/docker/graphite/config:/opt/graphite/config
+
+grafana:
+  image: grafana/grafana:latest
+  container_name: grafana
+  ports:
+    - "3000:3000"
+  env_file:
+    - 'env.grafana'
+  user: "0"
+  links:
+    - graphite
+  volumes:
+    # Data persistency
+    # sudo mkdir -p /srv/docker/grafana/data; chown 472:472 /srv/docker/grafana/data
+    - /srv/docker/grafana/data:/var/lib/grafana
