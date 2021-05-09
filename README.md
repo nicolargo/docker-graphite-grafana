@@ -1,6 +1,5 @@
 # Docker-compose files for a simple uptodate
-# Graphite
-# + Grafana stack
+# Graphite and Grafana stack
 
 Get the stack (only once):
 
