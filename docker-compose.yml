@@ -11,15 +11,16 @@ graphite:
     - "8125:8125/udp"
     - "8126:8126"
   env_file:
-    - 'env.grafana'
-  volumes:
+    - 'env.graphite'
+  # Uncomment if you want data retention
+  #  volumes:
     # Data persistency
     # sudo mkdir -p /srv/docker/graphite/conf
     # sudo mkdir -p /srv/docker/graphite/storage
     # sudo mkdir -p /srv/docker/graphite/config
-    - /srv/docker/graphite/conf:/opt/graphite/conf
-    - /srv/docker/graphite/storage:/opt/graphite/storage
-    - /srv/docker/graphite/config:/opt/graphite/config
+    #- /srv/docker/graphite/conf:/opt/graphite/conf
+    #- /srv/docker/graphite/storage:/opt/graphite/storage
+    #- /srv/docker/graphite/config:/opt/graphite/config
 
 grafana:
   image: grafana/grafana:latest
