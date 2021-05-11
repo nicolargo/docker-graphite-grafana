@@ -1,6 +1,12 @@
 # Docker-compose files for a simple uptodate
 # Graphite and Grafana stack
 
+# !!!!
+# Perf issue with the Graphite container
+# Use InfluxDB instead (bt activating the [graphite] endpoint
+# !!!!
+
+
 Get the stack (only once):
 
 ```
